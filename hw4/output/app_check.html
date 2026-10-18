@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs Live App Check</title>
+<style>
+  :root {
+    --yale: #00356b;
+    --yale-soft: #e8eef6;
+    --pass: #16723a;
+    --pass-soft: #e5f4ea;
+    --ink: #13213a;
+    --muted: #4f5d73;
+    --line: #d5dce6;
+    --bg: #f6f8fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 920px; margin: 0 auto; padding: 32px 16px 64px; }
+  header { border-bottom: 4px solid var(--yale); padding-bottom: 16px; margin-bottom: 28px; }
+  h1 { margin: 0 0 6px; font-size: 2rem; color: var(--yale); }
+  h2 { margin: 0 0 4px; font-size: 1.45rem; color: var(--yale); }
+  h3 { margin: 22px 0 8px; font-size: 1.05rem; }
+  p { margin: 0 0 10px; }
+  .meta { color: var(--muted); margin: 0; }
+  .meta a { color: var(--yale); }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--line); margin: 8px 0 4px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--yale-soft); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  td.num { font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-weight: 700; font-size: 0.85rem; background: var(--pass-soft); color: var(--pass); }
+  section.check { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 22px; margin: 28px 0; }
+  .check-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+  .check-head .what { color: var(--muted); margin: 0; }
+  figure { margin: 16px 0 0; }
+  figure a { display: block; }
+  figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; }
+  figcaption { margin-top: 6px; color: var(--muted); font-size: 0.93rem; }
+  figcaption b { color: var(--ink); }
+  .proves { margin-top: 16px; padding: 12px 14px; background: var(--pass-soft); border-left: 4px solid var(--pass); border-radius: 4px; }
+  .proves b { color: var(--pass); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  code { background: var(--yale-soft); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+  .zero { color: #b42318; font-weight: 700; }
+  footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); padding-top: 14px; }
+  @media (max-width: 700px) { .two { grid-template-columns: 1fr; } section.check { padding: 16px; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Campus Customs Live App Check</h1>
+  <p class="meta">Problem 11 · Tested on the <b>live site</b> <a href="https://campus-customs-63et.onrender.com/">campus-customs-63et.onrender.com</a> (Render) with its <b>Supabase Postgres</b> database · October 17, 2026 · browsing as a guest (no login).</p>
+</header>
+
+<h2>Summary</h2>
+<table>
+  <thead><tr><th>#</th><th>Check</th><th>Result</th><th>Screenshots</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><a href="#check-1">Chat reports an item's stock level and price, honestly, from the database</a></td><td><span class="badge">PASS</span></td><td>2</td></tr>
+    <tr><td>2</td><td><a href="#check-2">A category question puts matching product cards on the page</a></td><td><span class="badge">PASS</span></td><td>4</td></tr>
+    <tr><td>3</td><td><a href="#check-3">Problem 9 usability feature: Find-O-Matic search, category, in-stock size, and sort filters</a></td><td><span class="badge">PASS</span></td><td>1</td></tr>
+  </tbody>
+</table>
+<p class="meta">Click any screenshot to open it full size. Each check's "Database" table was queried from the same Supabase database the live site uses.</p>
+
+<!-- ============================ CHECK 1 ============================ -->
+<section class="check" id="check-1">
+  <div class="check-head">
+    <h2>Check 1: Chat checks an item's inventory level</h2>
+    <span class="badge">PASS</span>
+  </div>
+  <p class="what">On the <i>Ice Hockey Left Chest Hoodie</i> page, I asked Handsome Dan: <i>"How many of these are left in small, and how much is it? Do you have it in medium?"</i></p>
+
+  <figure>
+    <a href="app_check_images/inventory.png"><img src="app_check_images/inventory.png" alt="Chat window on the Ice Hockey Left Chest Hoodie page. Handsome Dan replies: There are 8 left in S, and it's $68. Sorry, it's sold out in M; it's currently available in XS, S, and XXL."></a>
+    <figcaption><b>Chat answer.</b> Handsome Dan knew "these" meant the hoodie on screen, and answered <b>8 left in S</b>, <b>$68</b>, <b>sold out in M</b>, in stock in XS, S, and XXL. He offered the restock list, which needs a login.</figcaption>
+  </figure>
+
+  <figure>
+    <a href="app_check_images/inventory_page.png"><img src="app_check_images/inventory_page.png" alt="Sizes and stock boxes on the same product page: XS 20 in stock, S 8 in stock, M sold out, L sold out, XL sold out, XXL 25 in stock."></a>
+    <figcaption><b>Same product's size boxes.</b> The page shows S: 8 in stock and M: sold out, matching the chat answer exactly.</figcaption>
+  </figure>
+
+  <h3>Database (Supabase): <code>ice-hockey-left-chest-hoodie</code>, price $68.00</h3>
+  <table>
+    <thead><tr><th>Size</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr></thead>
+    <tbody><tr><td>Quantity</td><td class="num">20</td><td class="num"><b>8</b></td><td class="num zero">0</td><td class="num zero">0</td><td class="num zero">0</td><td class="num">25</td></tr></tbody>
+  </table>
+
+  <p class="proves"><b>What this proves:</b> the chatbot looks stock and price up in the database rather than guessing. Its answer (8 in S, $68, M sold out) matches the database and the product page exactly, and it says clearly when a size is out of stock.</p>
+</section>
+
+<!-- ============================ CHECK 2 ============================ -->
+<section class="check" id="check-2">
+  <div class="check-head">
+    <h2>Check 2: Category question shows result cards on the page</h2>
+    <span class="badge">PASS</span>
+  </div>
+  <p class="what">Starting on the Home page, I asked Handsome Dan: <i>"What hoodies do you have?"</i></p>
+
+  <figure>
+    <a href="app_check_images/search_before.png"><img src="app_check_images/search_before.png" alt="Home page with the chat open and the question What hoodies do you have? typed in the message box, before sending."></a>
+    <figcaption><b>Before.</b> On the Home page (Location bar: <code>/~handsomedan/</code>), the question is typed but not sent yet.</figcaption>
+  </figure>
+
+  <figure>
+    <a href="app_check_images/search_results.png"><img src="app_check_images/search_results.png" alt="Products page now shows a From Handsome Dan section titled Yale Hoodies with 27 matches and product cards, next to the chat reply saying We've got 27 hoodies in stock and they're on the page now."></a>
+    <figcaption><b>After sending.</b> The site moved to the Products page by itself and added a <b>"From Handsome Dan: Yale Hoodies, 27 matches"</b> section of product cards, while the chat says "They're on the page now".</figcaption>
+  </figure>
+
+  <div class="two">
+    <figure>
+      <a href="app_check_images/search_cards.png"><img src="app_check_images/search_cards.png" alt="Close-up of the hoodie result cards with photos, names, starburst prices, and short descriptions."></a>
+      <figcaption><b>The cards.</b> Each result card has the product photo, name, price, and a short description.</figcaption>
+    </figure>
+    <figure>
+      <a href="app_check_images/search_card_detail.png"><img src="app_check_images/search_card_detail.png" alt="Detail page for the Brooks Brothers Double Knit Full Zip Hoodie Yale, priced $88, with a Back to Yale Hoodies link."></a>
+      <figcaption><b>Card opens its detail page.</b> Clicking the Brooks Brothers card opened its full product page ($88), with "← Back to 'Yale Hoodies'".</figcaption>
+    </figure>
+  </div>
+
+  <h3>Database (Supabase)</h3>
+  <table>
+    <thead><tr><th>Fact</th><th>Database</th><th>Live site</th></tr></thead>
+    <tbody>
+      <tr><td>Products whose type or name is a hoodie</td><td class="num">27</td><td class="num">27 cards</td></tr>
+      <tr><td>Brooks Brothers Double Knit Full Zip Hoodie price</td><td class="num">$88.00</td><td class="num">$88</td></tr>
+    </tbody>
+  </table>
+
+  <p class="proves"><b>What this proves:</b> the agent returns structured product matches, and the front end renders them as real product cards on the page (all 27 hoodies in the database). The cards still open the single-item page from Problem 3.</p>
+</section>
+
+<!-- ============================ CHECK 3 ============================ -->
+<section class="check" id="check-3">
+  <div class="check-head">
+    <h2>Check 3: Problem 9 usability feature, the Find-O-Matic filters</h2>
+    <span class="badge">PASS</span>
+  </div>
+  <p class="what">On the Products page I clicked <b>Hoodies</b>, set <b>In stock in: L</b>, and set <b>Sort: Price high to low</b>. The address became <code>/products?cat=hoodies&amp;size=L&amp;sort=price-desc</code>, a shareable link.</p>
+
+  <figure>
+    <a href="app_check_images/usability_filters.png"><img src="app_check_images/usability_filters.png" alt="Find-O-Matic 3000 filter panel with Hoodies selected, In stock in L, and Sort Price high to low. Result line reads 20 of 102 products in stock in L. First cards: Brooks Brothers $88, Champion Full Zip Hood $88, Basic Hoodie Big Yale $68."></a>
+    <figcaption><b>Filtered and sorted.</b> "<b>20 of 102 products in stock in L</b>", most expensive first: Brooks Brothers $88, Champion Full Zip Hood $88, Basic Hoodie Big Yale $68.</figcaption>
+  </figure>
+
+  <h3>Database (Supabase)</h3>
+  <table>
+    <thead><tr><th>Fact</th><th>Database</th><th>Live site</th></tr></thead>
+    <tbody>
+      <tr><td>Hoodies with size L in stock (quantity &gt; 0)</td><td class="num">20</td><td class="num">20</td></tr>
+      <tr><td>Top 3 by price</td><td>$88, $88, $68</td><td>$88, $88, $68</td></tr>
+      <tr><td>Hoodies sold out in L (correctly hidden)</td><td>7: Vintage Sailor Bulldog, Fencing, Ice Hockey, Sailing, UA Gameday, Yale Grandpa, Yale Sports Golf</td><td>none shown</td></tr>
+    </tbody>
+  </table>
+
+  <p class="proves"><b>What this proves:</b> the Problem 9 "find products faster" feature works on the live site. Category, in-stock size, and price sort combine correctly, and items a shopper can't buy in their size are hidden, matching the database.</p>
+</section>
+
+<footer>
+  <p><b>How this was tested:</b> a real browser on the live Render site, browsing as a guest so no passwords were entered. Guest chats aren't saved (0 chat rows were written). Screenshots were taken at the time of testing; the database figures come from Supabase queries run right after.</p>
+  <p>Screenshot files: <code>output/app_check_images/</code> (inventory.png, inventory_page.png, search_before.png, search_results.png, search_cards.png, search_card_detail.png, usability_filters.png).</p>
+</footer>
+
+</main>
+</body>
+</html>

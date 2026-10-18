@@ -1,0 +1,6 @@
+# Repo root. The project lives in hw4/ (see hw4/.gitignore). Safety net for secrets and local notes:
+.env
+.env.*
+!.env.example
+setup_notes/
+.DS_Store

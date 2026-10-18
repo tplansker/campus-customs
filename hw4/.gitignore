@@ -1,0 +1,27 @@
+# ---- Secrets: never commit. Real values go in .env locally and in Render's environment. ----
+.env
+.env.*
+!.env.example
+
+# ---- Local-only data pack (course-provided): database + product images ----
+# Place it at hw4/data/ (see README). Not in git.
+data/
+
+# ---- Python ----
+.venv
+.venv/
+.venv.nosync/
+__pycache__/
+*.pyc
+
+# ---- Node ----
+node_modules/
+frontend/dist-ssr/
+
+# ---- Local helper with this project's Supabase address ----
+backend/set_database_url.py
+
+# ---- Editor / OS ----
+.DS_Store
+.vscode/
+.idea/
